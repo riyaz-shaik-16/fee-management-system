@@ -10,7 +10,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   selectUser,
   clearUser,
@@ -54,22 +54,6 @@ export default function ProfilePage() {
     setIsEditing(false);
   };
 
-  const handlePayFee = async () => {
-    try {
-      const { data } = await axios.put(
-        "http://localhost:9000/api/students/v1/fee-status",
-        { feePaid: true },
-        { withCredentials: true }
-      );
-      
-      if (data.success) {
-        dispatch(updateUserThunk({ feePaid: true }));
-        console.log("Fee paid successfully");
-      }
-    } catch (err) {
-      console.error("Fee payment failed:", err);
-    }
-  };
 
   const handleLogout = async () => {
     try {
@@ -206,13 +190,13 @@ export default function ProfilePage() {
                     </span>
                   </div>
                   {!user?.feePaid && (
-                    <button
-                      onClick={handlePayFee}
+                    <Link
+                      to={`/pay-fee/${user?.email}`}
                       className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center gap-2 justify-center"
                     >
                       <CreditCard className="w-5 h-5" />
                       Pay Fee
-                    </button>
+                    </Link>
                   )}
                 </div>
               </div>
