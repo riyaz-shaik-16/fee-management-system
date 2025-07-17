@@ -1,21 +1,34 @@
 // LoginPage.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react';
+import {useUser} from "../context/userContext";
+import {useNavigate} from "react-router-dom"
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
+    reset
   } = useForm();
+  const navigate = useNavigate();
+
+  const {login,loading} = useUser();
 
   const onSubmit = async (data) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Login data:', data);
-    alert('Login successful!');
+    try {
+      const loggedIn = await login(data);
+      if(loggedIn){
+        alert("LoggedIn succesfullyyy!");
+      }
+      navigate("/profile")
+    } catch (error) {
+      console.log("Error in login oage: ",error);
+    } finally {
+      reset()
+    }
   };
 
   return (
@@ -101,7 +114,7 @@ const LoginPage = () => {
               ) : (
                 <>
                   <LogIn className="w-5 h-5" />
-                  <span>Sign In</span>
+                  <span>{loading ? "Signing in.." : "Sing in"}</span>
                 </>
               )}
             </button>

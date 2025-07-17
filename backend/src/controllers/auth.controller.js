@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 export const login = async (req, res) => {
   try {
-    // console.log("Req body: ",req?.body);
+    console.log("Req body: ",req?.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -32,6 +32,17 @@ export const login = async (req, res) => {
     }
 
     const token = student.generateToken();
+
+    console.log("Token generated:");
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+
 
     return res.status(200).json({
       success: true,
@@ -129,4 +140,20 @@ export const logout = async (req, res) => {
   }
 };
 
-
+export const getProfile = async (req, res) => {
+  try {
+    const id = req.user?.id;
+    const student = await Student.findById(id,"_id name email feePaid");
+    return res.status(200).json({
+      success:true,
+      message:"Fetched student successfully!",
+      student
+    })
+  } catch (error) {
+    console.log("Error in get Profile: ", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+    });
+  }
+};
