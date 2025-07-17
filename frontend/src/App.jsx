@@ -1,10 +1,14 @@
-
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 const App = () => {
   return (
-    <h1 className='text-3xl text-red-900'>
-      Hey there!
-    </h1>
-  )
-}
+    <>
+      <Navbar />
+      <Login />
+      <Signup />
+    </>
+  );
+};
 
-export default App
+export default App;
