@@ -1,33 +1,56 @@
-// LoginPage.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff, Mail, Lock, LogIn } from 'lucide-react';
-import {useUser} from "../context/userContext";
-import {useNavigate} from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectUserError,
+  selectUserLoading,
+  setError,
+  setLoading,
+  setUser
+} from '../redux/slices/user.slice';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const error = useSelector(selectUserError);
+  const [loading,setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset
   } = useForm();
-  const navigate = useNavigate();
 
-  const {login,loading} = useUser();
 
-  const onSubmit = async (data) => {
+
+  const onSubmit = async (values) => {
     try {
-      const loggedIn = await login(data);
-      if(loggedIn){
-        alert("LoggedIn succesfullyyy!");
+      setLoading(true);
+      dispatch(setError(null)); 
+      const { data } = await axios.post(
+        'http://localhost:9000/api/auth/v1/login',
+        values,
+        { withCredentials: true }
+      );
+
+      if (data.success) {
+        dispatch(setUser(data.student));
+        reset(); 
+        navigate('/profile');
+      } else {
+        dispatch(setError(data.message || 'Login failed'));
       }
-      navigate("/profile")
     } catch (error) {
-      console.log("Error in login oage: ",error);
+      console.error('Error in login:', error);
+      dispatch(setError(error.response?.data?.message || 'Internal Server Error'));
     } finally {
-      reset()
+      setLoading(false);
     }
   };
 
@@ -43,6 +66,13 @@ const LoginPage = () => {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
             <p className="text-gray-600 dark:text-gray-400">Sign in to your account</p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="text-red-500 text-sm text-center border border-red-400 bg-red-100 rounded-md p-2">
+              {error}
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -106,15 +136,15 @@ const LoginPage = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || loading}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
             >
-              {isSubmitting ? (
+              {isSubmitting || loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <LogIn className="w-5 h-5" />
-                  <span>{loading ? "Signing in.." : "Sing in"}</span>
+                  <span>{loading ? "Signing in..." : "Sign in"}</span>
                 </>
               )}
             </button>
@@ -136,4 +166,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-

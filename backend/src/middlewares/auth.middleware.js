@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 
 export const requireAuth = (req, res, next) => {
-  console.log("req cookies: ",req?.cookies?.token);
+  // console.log("req cookies: ",req?.cookies?.token);
   const token =
     req.cookies?.token || req.header("Authorization")?.replace("Bearer ", "");
 
