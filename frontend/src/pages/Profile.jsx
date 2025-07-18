@@ -28,9 +28,8 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     try {
-      // console.log("Setting theese fields: ", tempName, "   ", tempEmail);
       const { data } = await axios.post(
-        "http://localhost:9000/api/student/v1/update-profile",
+        "https://fee-management-system.onrender.com/api/student/v1/update-profile",
         { name: tempName, email: tempEmail },
         { withCredentials: true }
       );
@@ -55,7 +54,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:9000/api/auth/v1/logout",
+        "https://fee-management-system.onrender.com/api/auth/v1/logout",
         {},
         {
           withCredentials: true,

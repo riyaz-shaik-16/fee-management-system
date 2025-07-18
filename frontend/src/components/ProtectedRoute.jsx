@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuthenticated, selectUserLoading } from "../redux/slices/user.slice";
 import useAuthGuard from "../hooks/useAuth";
+import Skeleton from "./index";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -9,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
   const { checkedSession } = useAuthGuard();
 
   if (!checkedSession || loading) {
-    return <div className="text-center mt-10">Checking session...</div>;
+    return <Skeleton/>;
   }
 
   if (!isAuthenticated) {
