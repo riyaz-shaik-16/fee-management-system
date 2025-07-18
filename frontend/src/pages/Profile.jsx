@@ -28,13 +28,13 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     try {
-      console.log("Setting theese fields: ", tempName, "   ", tempEmail);
+      // console.log("Setting theese fields: ", tempName, "   ", tempEmail);
       const { data } = await axios.post(
         "http://localhost:9000/api/student/v1/update-profile",
         { name: tempName, email: tempEmail },
         { withCredentials: true }
       );
-      console.log("Data for updaing user: ", data);
+      // console.log("Data for updaing user: ", data);
       if (data.success) {
         dispatch(setUser(data.student));
       }
@@ -61,7 +61,7 @@ export default function ProfilePage() {
           withCredentials: true,
         }
       );
-      console.log(response);
+      // console.log(response);
       dispatch(clearUser());
       dispatch(clearStudents());
       socket.disconnect()

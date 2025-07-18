@@ -12,13 +12,13 @@ const Layout = () => {
 
   useEffect(() => {
     socket.on("update_student_details", (updatedData) => {
-      console.log("Received student update:", updatedData);
+      // console.log("Received student update:", updatedData);
       dispatch(updateStudent(updatedData));
-      console.log("Students after updating: ",students);
+      // console.log("Students after updating: ",students);
     });
 
     socket.on("add_student", (newStudent) => {
-      console.log("New student added:", newStudent);
+      // console.log("New student added:", newStudent);
       dispatch(addStudent(newStudent));
     });
 

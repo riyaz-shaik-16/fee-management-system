@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import socket from "../socket";
-import ThemeToggle from "../components/ThemeToggle"; // ✅ Import added
+import { ThemeToggle } from '../components';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);

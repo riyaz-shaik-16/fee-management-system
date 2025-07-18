@@ -1,14 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PublicRoute from "./components/PublicRoute";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Profile from "./components/Profile";
-import Layout from "./components/Layout";
-import Landing from "./components/Landing";
-import PageNotFound from "./components/PageNotFound";
-import AllStudents from "./components/AllStudents";
-import PayFeesPage from "./components/PayFee";
+import {
+  AllStudents,
+  Landing,
+  Login,
+  PageNotFound,
+  PayFee,
+  Profile,
+  Signup,
+} from "./pages";
+
+import { Layout, ProtectedRoute, PublicRoute } from "./components";
 
 const App = () => {
   return (
@@ -50,7 +51,7 @@ const App = () => {
           path="/pay-fee/:email"
           element={
             <ProtectedRoute>
-              <PayFeesPage />
+              <PayFee />
             </ProtectedRoute>
           }
         />

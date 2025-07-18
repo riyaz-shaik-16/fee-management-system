@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectIsAuthenticated, selectUserLoading } from "../redux/slices/user.slice";
 import { Navigate, Link } from "react-router-dom";
-import ThemeToggle from "../components/ThemeToggle";
+import { ThemeToggle } from "../components";
 
 const Landing = () => {
   const loading = useSelector(selectUserLoading);

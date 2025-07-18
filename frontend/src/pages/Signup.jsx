@@ -9,7 +9,7 @@ import {
   setError,
   setUser
 } from "../redux/slices/user.slice";
-import ThemeToggle from "../components/ThemeToggle";
+import { ThemeToggle } from "../components";
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);

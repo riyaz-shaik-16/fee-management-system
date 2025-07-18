@@ -23,7 +23,7 @@ const PayFeesPage = () => {
           { withCredentials: true }
         );
 
-        console.log("data: ",data);
+        // console.log("data: ",data);
 
         if (data.success) {
           dispatch(setUser(data.student));
