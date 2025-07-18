@@ -62,6 +62,7 @@ export default function ProfilePage() {
       );
       // console.log(response);
       dispatch(clearUser());
+      sessionStorage.clear();
       dispatch(clearStudents());
       socket.disconnect()
       navigate("/login");

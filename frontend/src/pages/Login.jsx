@@ -39,7 +39,8 @@ const LoginPage = () => {
 
       if (data.success) {
         dispatch(setUser(data.student));
-        socket.connect(); // ✅ Connect socket
+        sessionStorage.setItem("token",token);
+        socket.connect();
         reset();
         navigate('/profile');
       } else {

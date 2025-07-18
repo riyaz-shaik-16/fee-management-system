@@ -130,7 +130,11 @@ export const signup = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     // console.log("logout hitttt");
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
+    });
     return res
       .status(200)
       .json({ success: true, message: "Logged out successfully" });
