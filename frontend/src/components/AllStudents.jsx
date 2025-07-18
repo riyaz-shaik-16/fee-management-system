@@ -9,6 +9,7 @@ import {
 } from "../redux/slices/students.slice";
 import { useEffect } from "react";
 import axios from "axios";
+import {User} from "lucide-react"
 
 const AllStudents = () => {
   const students = useSelector(selectStudents);
@@ -43,7 +44,7 @@ const AllStudents = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-          {/* Header */}
+
           <div className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-700 px-6 py-8 sm:px-8">
             <h2 className="text-3xl font-bold text-white text-center sm:text-left">
               All Students
@@ -53,7 +54,6 @@ const AllStudents = () => {
             </p>
           </div>
 
-          {/* Content */}
           <div className="p-6 sm:p-8">
             {loading ? (
               <div className="text-center py-16">
@@ -82,7 +82,7 @@ const AllStudents = () => {
               </div>
             ) : (
               <div className="w-full">
-                {/* Desktop Table */}
+
                 <div className="hidden lg:block">
                   <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -107,8 +107,8 @@ const AllStudents = () => {
                           >
                             <td className="px-6 py-5">
                               <div className="flex items-center">
-                                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm mr-4">
-                                  {student.name.split(' ').map(n => n[0]).join('')}
+                                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm mr-4">
+                                  <User className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                                 </div>
                                 <div className="text-base font-medium text-gray-900 dark:text-white">
                                   {student.name}
@@ -139,7 +139,6 @@ const AllStudents = () => {
                   </div>
                 </div>
 
-                {/* Mobile/Tablet Card View */}
                 <div className="lg:hidden space-y-4">
                   {students.map((student) => (
                     <div
@@ -148,8 +147,8 @@ const AllStudents = () => {
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center space-x-4">
-                          <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            {student.name.split(' ').map(n => n[0]).join('')}
+                          <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
+                            <User className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                           </div>
                           <div>
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
