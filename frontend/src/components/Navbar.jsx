@@ -12,12 +12,10 @@ const Navbar = () => {
     <nav className="bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Branding */}
           <div className="text-xl font-bold text-gray-800 dark:text-white">
             FeeManager
           </div>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             <NavLink
               to="/students"
@@ -48,12 +46,9 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-          {/* Right Controls */}
           <div className="flex items-center space-x-4">
             <ThemeToggle />
 
-
-            {/* Burger Menu */}
             <button
               className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -81,7 +76,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Nav */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           menuOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"

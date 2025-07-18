@@ -16,7 +16,7 @@ export const getAllStudents = async (req, res) => {
       students: normalizedStudents,
     });
   } catch (err) {
-    console.error("Error fetching students:", err);
+    // console.error("Error fetching students:", err);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
@@ -64,7 +64,7 @@ export const updateStudentProfile = async (req, res) => {
       },
     });
   } catch (err) {
-    console.log("Error updating profile:", err);
+    // console.log("Error updating profile:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
@@ -109,7 +109,7 @@ export const payFee = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("Error processing fee payment:", err);
+    // console.error("Error processing fee payment:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
 };

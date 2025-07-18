@@ -20,7 +20,7 @@ export const requireAuth = (req, res, next) => {
     };
     next();
   } catch (err) {
-    console.error("Auth middleware error:", err.message);
+    // console.error("Auth middleware error:", err.message);
     return res.status(401).json({ message: "Unauthorized: Invalid token" });
   }
 };

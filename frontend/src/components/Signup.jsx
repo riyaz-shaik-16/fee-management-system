@@ -48,14 +48,12 @@ const SignupPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 relative">
 
-      {/* ✅ Theme Toggle Button */}
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
 
       <div className="w-full max-w-md">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 space-y-6">
-          {/* Header */}
           <div className="text-center space-y-2">
             <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto">
               <UserPlus className="w-8 h-8 text-white" />
@@ -64,16 +62,13 @@ const SignupPage = () => {
             <p className="text-gray-600 dark:text-gray-400">Sign up for a new account</p>
           </div>
 
-          {/* Error Message */}
           {error && (
             <div className="text-red-500 text-sm text-center border border-red-400 bg-red-100 rounded-md p-2">
               {error}
             </div>
           )}
 
-          {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Name Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
               <div className="relative">
@@ -91,7 +86,6 @@ const SignupPage = () => {
               {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
 
-            {/* Email Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
               <div className="relative">
@@ -112,7 +106,6 @@ const SignupPage = () => {
               {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
             </div>
 
-            {/* Password Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
               <div className="relative">
@@ -141,7 +134,6 @@ const SignupPage = () => {
               {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
             </div>
 
-            {/* Confirm Password Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
               <div className="relative">
@@ -161,7 +153,6 @@ const SignupPage = () => {
               )}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={isSubmitting}
@@ -178,7 +169,6 @@ const SignupPage = () => {
             </button>
           </form>
 
-          {/* Footer */}
           <div className="text-center">
             <p className="text-gray-600 dark:text-gray-400">
               Already have an account?{" "}

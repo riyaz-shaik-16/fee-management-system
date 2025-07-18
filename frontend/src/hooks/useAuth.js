@@ -20,7 +20,6 @@ const useAuthGuard = () => {
           dispatch(setUser(data.student));
           if (!socket.connected) {
             socket.connect();
-            console.log("🟢 Socket connected from auth guard");
           }
         } else {
           dispatch(clearUser());

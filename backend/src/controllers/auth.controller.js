@@ -4,7 +4,7 @@ import { getIO } from "../socket.js";
 
 export const login = async (req, res) => {
   try {
-    console.log("Req body: ", req?.body);
+    // console.log("Req body: ", req?.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -34,7 +34,7 @@ export const login = async (req, res) => {
 
     const token = student.generateToken();
 
-    console.log("Token generated:");
+    // console.log("Token generated:");
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -55,7 +55,7 @@ export const login = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log("Error in login: ", error);
+    // console.log("Error in login: ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",
@@ -119,7 +119,7 @@ export const signup = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log("Error in Signup: ", error);
+    // console.log("Error in Signup: ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",
@@ -129,13 +129,13 @@ export const signup = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    console.log("logout hitttt");
+    // console.log("logout hitttt");
     res.clearCookie("token");
     return res
       .status(200)
       .json({ success: true, message: "Logged out successfully" });
   } catch (error) {
-    console.log("Error in logout: ", error);
+    // console.log("Error in logout: ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",
@@ -153,7 +153,7 @@ export const getProfile = async (req, res) => {
       student,
     });
   } catch (error) {
-    console.log("Error in get Profile: ", error);
+    // console.log("Error in get Profile: ", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",

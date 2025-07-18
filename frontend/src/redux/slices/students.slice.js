@@ -16,7 +16,6 @@ const studentsSlice = createSlice({
     },
     updateStudent(state, action) {
       const updated = action.payload;
-      console.log("In update action: ",updated);
       state.students = state.students.map((student) =>
         student.id === updated.id ? updated : student
       );

@@ -56,14 +56,13 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 relative">
       
-      {/* ✅ Theme Toggle in Top-Right */}
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
 
       <div className="w-full max-w-md">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 space-y-6">
-          {/* Header */}
+
           <div className="text-center space-y-2">
             <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto">
               <LogIn className="w-8 h-8 text-white" />
@@ -72,16 +71,13 @@ const LoginPage = () => {
             <p className="text-gray-600 dark:text-gray-400">Sign in to your account</p>
           </div>
 
-          {/* Error */}
           {error && (
             <div className="text-red-500 text-sm text-center border border-red-400 bg-red-100 rounded-md p-2">
               {error}
             </div>
           )}
 
-          {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Email */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Email Address
@@ -104,7 +100,6 @@ const LoginPage = () => {
               {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
             </div>
 
-            {/* Password */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 Password
@@ -134,7 +129,6 @@ const LoginPage = () => {
               {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting || loading}
@@ -151,7 +145,6 @@ const LoginPage = () => {
             </button>
           </form>
 
-          {/* Footer */}
           <div className="text-center">
             <p className="text-gray-600 dark:text-gray-400">
               Don't have an account?{' '}

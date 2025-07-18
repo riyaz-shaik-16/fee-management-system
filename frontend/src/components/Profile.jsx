@@ -75,7 +75,6 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 space-y-6">
-          {/* Header */}
           <div className="text-center space-y-4">
             <div className="w-20 h-20 sm:w-24 sm:h-24 bg-blue-600 rounded-full flex items-center justify-center mx-auto">
               <User className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
@@ -90,9 +89,7 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Profile Information */}
           <div className="space-y-6">
-            {/* Edit Toggle */}
             {!isEditing ? (
               <div className="flex justify-end">
                 <button
@@ -122,7 +119,6 @@ export default function ProfilePage() {
               </div>
             )}
 
-            {/* Name Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                 <User className="w-4 h-4" />
@@ -145,7 +141,6 @@ export default function ProfilePage() {
               )}
             </div>
 
-            {/* Email Field */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                 <Mail className="w-4 h-4" />
@@ -168,7 +163,6 @@ export default function ProfilePage() {
               )}
             </div>
 
-            {/* Fee Status */}
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
                 <DollarSign className="w-4 h-4" />
@@ -205,7 +199,6 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* Logout */}
             <div className="pt-4 border-t border-gray-200 dark:border-gray-600">
               <button
                 onClick={handleLogout}
@@ -217,7 +210,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Footer */}
           <div className="text-center pt-4 border-t border-gray-200 dark:border-gray-600">
             <p className="text-gray-600 dark:text-gray-400 text-sm">
               Keep your information up to date for the best experience
