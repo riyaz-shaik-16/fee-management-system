@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuthenticated, selectUserLoading } from "../redux/slices/user.slice";
 import useAuthGuard from "../hooks/useAuth";
-import Skeleton from "./index";
+import { Skeleton } from ".";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
