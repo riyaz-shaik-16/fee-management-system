@@ -30,7 +30,7 @@ const SignupPage = () => {
   const onSubmit = async (values) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:9000/api/auth/v1/signup",
+        "https://fee-management-system.onrender.com/api/auth/v1/signup",
         values,
         { withCredentials: true }
       );

@@ -21,7 +21,7 @@ const AllStudents = () => {
     try {
       dispatch(setLoading(true));
       const { data } = await axios.get(
-        "http://localhost:9000/api/student/v1/students",
+        "https://fee-management-system.onrender.com/api/student/v1/students",
         { withCredentials: true }
       );
       if (data.success) {

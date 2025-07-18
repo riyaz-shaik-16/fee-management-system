@@ -18,7 +18,7 @@ const PayFeesPage = () => {
     setTimeout(async () => {
       try {
         const { data } = await axios.post(
-          "http://localhost:9000/api/student/v1/pay-fee",
+          "https://fee-management-system.onrender.com/api/student/v1/pay-fee",
           {},
           { withCredentials: true }
         );

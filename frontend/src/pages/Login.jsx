@@ -32,7 +32,7 @@ const LoginPage = () => {
       setLoading(true);
       dispatch(setError(null));
       const { data } = await axios.post(
-        'http://localhost:9000/api/auth/v1/login',
+        'https://fee-management-system.onrender.com/api/auth/v1/login',
         values,
         { withCredentials: true }
       );

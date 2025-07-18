@@ -12,7 +12,7 @@ const useAuthGuard = () => {
     const checkSession = async () => {
       try {
         dispatch(setLoading(true));
-        const { data } = await axios.get("http://localhost:9000/api/auth/v1/get-profile", {
+        const { data } = await axios.get("https://fee-management-system.onrender.com/api/auth/v1/get-profile", {
           withCredentials: true,
         });
 
