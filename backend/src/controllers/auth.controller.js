@@ -1,9 +1,10 @@
 import Student from "../models/student.model.js";
 import bcrypt from "bcryptjs";
+import { getIO } from "../socket.js";
 
 export const login = async (req, res) => {
   try {
-    console.log("Req body: ",req?.body);
+    console.log("Req body: ", req?.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -41,8 +42,6 @@ export const login = async (req, res) => {
       sameSite: "Strict",
       maxAge: 24 * 60 * 60 * 1000,
     });
-
-
 
     return res.status(200).json({
       success: true,
@@ -101,6 +100,14 @@ export const signup = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
+    const io = getIO();
+    io.emit("add_student", {
+      id: newStudent._id,
+      name: newStudent.name,
+      email: newStudent.email,
+      feePaid: newStudent.feePaid,
+    });
+
     return res.status(201).json({
       success: true,
       message: "Signup successful",
@@ -139,12 +146,12 @@ export const logout = async (req, res) => {
 export const getProfile = async (req, res) => {
   try {
     const id = req.user?.id;
-    const student = await Student.findById(id,"_id name email feePaid");
+    const student = await Student.findById(id, "_id name email feePaid");
     return res.status(200).json({
-      success:true,
-      message:"Fetched student successfully!",
-      student
-    })
+      success: true,
+      message: "Fetched student successfully!",
+      student,
+    });
   } catch (error) {
     console.log("Error in get Profile: ", error);
     return res.status(500).json({

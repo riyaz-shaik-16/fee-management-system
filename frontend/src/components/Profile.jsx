@@ -11,12 +11,10 @@ import {
 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import {
-  selectUser,
-  clearUser,
-  setUser,
-} from "../redux/slices/user.slice";
+import { selectUser, clearUser, setUser } from "../redux/slices/user.slice";
+import { clearStudents } from "../redux/slices/students.slice";
 import axios from "axios";
+import socket from "../socket";
 
 export default function ProfilePage() {
   const user = useSelector(selectUser);
@@ -30,14 +28,14 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     try {
-      console.log("Setting theese fields: ",tempName,"   ",tempEmail)
+      console.log("Setting theese fields: ", tempName, "   ", tempEmail);
       const { data } = await axios.post(
         "http://localhost:9000/api/student/v1/update-profile",
         { name: tempName, email: tempEmail },
         { withCredentials: true }
       );
-      console.log("Data for updaing user: ",data);
-      if(data.success){
+      console.log("Data for updaing user: ", data);
+      if (data.success) {
         dispatch(setUser(data.student));
       }
       setIsEditing(false);
@@ -54,14 +52,19 @@ export default function ProfilePage() {
     setIsEditing(false);
   };
 
-
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:9000/api/auth/v1/logout",{}, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "http://localhost:9000/api/auth/v1/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       console.log(response);
       dispatch(clearUser());
+      dispatch(clearStudents());
+      socket.disconnect()
       navigate("/login");
     } catch (err) {
       console.log("Logout error:", err);

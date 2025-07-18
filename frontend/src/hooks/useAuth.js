@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser, clearUser, setLoading } from "../redux/slices/user.slice";
+import socket from "../socket";
 
 const useAuthGuard = () => {
   const dispatch = useDispatch();
@@ -17,11 +18,17 @@ const useAuthGuard = () => {
 
         if (data.success) {
           dispatch(setUser(data.student));
+          if (!socket.connected) {
+            socket.connect();
+            console.log("🟢 Socket connected from auth guard");
+          }
         } else {
           dispatch(clearUser());
+          socket.disconnect();
         }
       } catch (err) {
         dispatch(clearUser());
+        socket.disconnect();
       } finally {
         dispatch(setLoading(false));
         setCheckedSession(true);

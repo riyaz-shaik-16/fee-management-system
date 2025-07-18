@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectIsAuthenticated, selectUserLoading } from "../redux/slices/user.slice";
 import { Navigate, Link } from "react-router-dom";
+import ThemeToggle from "../components/ThemeToggle";
 
 const Landing = () => {
   const loading = useSelector(selectUserLoading);
@@ -10,7 +11,12 @@ const Landing = () => {
   if (isAuthenticated) return <Navigate to="/profile" replace />;
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-gray-900 dark:to-gray-800 px-4 py-12 text-center">
+    <section className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-100 to-indigo-200 dark:from-gray-900 dark:to-gray-800 px-4 py-12 text-center relative">
+
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
       <div className="max-w-2xl space-y-6">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight">
           Manage Student Fees Seamlessly

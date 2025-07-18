@@ -1,13 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   students: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 const studentsSlice = createSlice({
-  name: 'students',
+  name: "students",
   initialState,
   reducers: {
     setStudents(state, action) {
@@ -16,11 +16,15 @@ const studentsSlice = createSlice({
     },
     updateStudent(state, action) {
       const updated = action.payload;
-      const index = state.students.findIndex(s => s._id === updated._id);
-      if (index !== -1) {
-        state.students[index] = updated;
-      }
+      console.log("In update action: ",updated);
+      state.students = state.students.map((student) =>
+        student.id === updated.id ? updated : student
+      );
     },
+    addStudent: (state, action) => {
+      state.students.push(action.payload);
+    },
+
     setLoading(state, action) {
       state.loading = action.payload;
     },
@@ -31,8 +35,8 @@ const studentsSlice = createSlice({
       state.students = [];
       state.error = null;
       state.loading = false;
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -40,7 +44,8 @@ export const {
   updateStudent,
   setLoading,
   setError,
-  clearStudents
+  clearStudents,
+  addStudent,
 } = studentsSlice.actions;
 
 export const selectStudents = (state) => state.students.students;

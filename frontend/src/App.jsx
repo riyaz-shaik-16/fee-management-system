@@ -13,31 +13,31 @@ import PayFeesPage from "./components/PayFee";
 const App = () => {
   return (
     <Routes>
-      <Route element={<Layout />}>
       <Route
-          path="/"
-          element={
-            <PublicRoute>
-              <Landing />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <PublicRoute>
-              <Signup />
-            </PublicRoute>
-          }
-        />
+        path="/"
+        element={
+          <PublicRoute>
+            <Landing />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        }
+      />
+      <Route element={<Layout />}>
         <Route
           path="/profile"
           element={
@@ -50,7 +50,7 @@ const App = () => {
           path="/pay-fee/:email"
           element={
             <ProtectedRoute>
-              <PayFeesPage/>
+              <PayFeesPage />
             </ProtectedRoute>
           }
         />
@@ -63,7 +63,7 @@ const App = () => {
           }
         />
       </Route>
-      <Route path="*" element={<PageNotFound/>}/>
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 };

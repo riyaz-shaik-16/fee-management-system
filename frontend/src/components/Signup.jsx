@@ -1,30 +1,58 @@
-// SignupPage.jsx
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Eye, EyeOff, User, Mail, Lock, UserPlus } from 'lucide-react';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Eye, EyeOff, User, Mail, Lock, UserPlus } from "lucide-react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  selectUserError,
+  setError,
+  setUser
+} from "../redux/slices/user.slice";
+import ThemeToggle from "../components/ThemeToggle";
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isSubmitting },
-    reset
+    reset,
   } = useForm();
 
-  const password = watch('password');
+  const password = watch("password");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const error = useSelector(selectUserError);
 
-  const onSubmit = async (data) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Signup data:', data);
-    alert('Account created successfully!');
-    reset();
+  const onSubmit = async (values) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:9000/api/auth/v1/signup",
+        values,
+        { withCredentials: true }
+      );
+      if (data.success) {
+        dispatch(setUser(data.user));
+        navigate("/profile");
+        reset();
+      }
+    } catch (error) {
+      console.log("Error in signup: ", error);
+      dispatch(setError(error.response?.data?.message || "Internal Server Error"));
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4 relative">
+
+      {/* ✅ Theme Toggle Button */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
       <div className="w-full max-w-md">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 space-y-6">
           {/* Header */}
@@ -36,76 +64,67 @@ const SignupPage = () => {
             <p className="text-gray-600 dark:text-gray-400">Sign up for a new account</p>
           </div>
 
+          {/* Error Message */}
+          {error && (
+            <div className="text-red-500 text-sm text-center border border-red-400 bg-red-100 rounded-md p-2">
+              {error}
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Name Field */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Full Name
-              </label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
-                  {...register('name', {
-                    required: 'Name is required',
-                    minLength: {
-                      value: 2,
-                      message: 'Name must be at least 2 characters'
-                    }
+                  {...register("name", {
+                    required: "Name is required",
+                    minLength: { value: 2, message: "Name must be at least 2 characters" }
                   })}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
                   placeholder="Enter your full name"
                 />
               </div>
-              {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name.message}</p>
-              )}
+              {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
 
             {/* Email Field */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Email Address
-              </label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="email"
-                  {...register('email', {
-                    required: 'Email is required',
+                  {...register("email", {
+                    required: "Email is required",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address'
+                      message: "Invalid email address"
                     }
                   })}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
                   placeholder="Enter your email"
                 />
               </div>
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
-              )}
+              {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
             </div>
 
             {/* Password Field */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Password
-              </label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
-                  type={showPassword ? 'text' : 'password'}
-                  {...register('password', {
-                    required: 'Password is required',
-                    minLength: {
-                      value: 8,
-                      message: 'Password must be at least 8 characters'
-                    },
+                  type={showPassword ? "text" : "password"}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: { value: 8, message: "Password must be at least 8 characters" },
                     pattern: {
                       value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-                      message: 'Password must contain uppercase, lowercase, and number'
+                      message: "Password must contain uppercase, lowercase, and number"
                     }
                   })}
                   className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
@@ -119,23 +138,19 @@ const SignupPage = () => {
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
-              {errors.password && (
-                <p className="text-red-500 text-sm">{errors.password.message}</p>
-              )}
+              {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
             </div>
 
             {/* Confirm Password Field */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Confirm Password
-              </label>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="password"
-                  {...register('confirmPassword', {
-                    required: 'Please confirm your password',
-                    validate: value => value === password || 'Passwords do not match'
+                  {...register("confirmPassword", {
+                    required: "Please confirm your password",
+                    validate: (value) => value === password || "Passwords do not match"
                   })}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-all duration-200"
                   placeholder="Confirm your password"
@@ -166,10 +181,10 @@ const SignupPage = () => {
           {/* Footer */}
           <div className="text-center">
             <p className="text-gray-600 dark:text-gray-400">
-              Already have an account?{' '}
-              <button className="text-blue-600 hover:text-blue-700 font-medium">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-600 hover:text-blue-700 font-medium">
                 Sign in here
-              </button>
+              </Link>
             </p>
           </div>
         </div>
