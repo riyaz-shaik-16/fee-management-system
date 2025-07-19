@@ -42,7 +42,7 @@ const PayFeesPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
       <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 space-y-6">
         <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
-          Simulate Fee Payment
+          Fee Payment - fake detailssssss
         </h2>
 
         <form onSubmit={handlePayNow} className="space-y-5">

@@ -9,7 +9,8 @@ import {
 } from "../redux/slices/students.slice";
 import { useEffect } from "react";
 import axios from "axios";
-import {User} from "lucide-react"
+import {User} from "lucide-react";
+import {Skeleton} from "../components"
 
 const AllStudents = () => {
   const students = useSelector(selectStudents);
@@ -57,10 +58,7 @@ const AllStudents = () => {
 
           <div className="p-6 sm:p-8">
             {loading ? (
-              <div className="text-center py-16">
-                <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent"></div>
-                <p className="mt-4 text-gray-600 dark:text-gray-300 font-medium">Loading students...</p>
-              </div>
+              <Skeleton/>
             ) : error ? (
               <div className="text-center py-16">
                 <div className="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-4">
