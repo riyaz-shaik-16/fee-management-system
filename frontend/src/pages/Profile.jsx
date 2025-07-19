@@ -30,6 +30,7 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${apiUrl}/api/student/v1/update-profile`,
         { name: tempName, email: tempEmail },
