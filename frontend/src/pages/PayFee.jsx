@@ -19,7 +19,7 @@ const PayFeesPage = () => {
     setTimeout(async () => {
       try {
         const { data } = await axios.post(
-          `{apiUrl}/api/student/v1/pay-fee`,
+          `${apiUrl}/api/student/v1/pay-fee`,
           {},
           { withCredentials: true }
         );
