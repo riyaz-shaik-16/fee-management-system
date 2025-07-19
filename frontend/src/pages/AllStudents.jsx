@@ -16,12 +16,13 @@ const AllStudents = () => {
   const loading = useSelector(selectStudentsLoading);
   const error = useSelector(selectStudentsError);
   const dispatch = useDispatch();
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const getAllStudents = async () => {
     try {
       dispatch(setLoading(true));
       const { data } = await axios.get(
-        "https://fee-management-system.onrender.com/api/student/v1/students",
+        `${apiUrl}/api/student/v1/students`,
         { withCredentials: true }
       );
       if (data.success) {

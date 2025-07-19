@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
+const apiUrl = import.meta.env.VITE_API_URL;
 
-const socket = io("https://fee-management-system.onrender.com", {
+const socket = io(apiUrl, {
   withCredentials: true,
   autoConnect: false,
 });

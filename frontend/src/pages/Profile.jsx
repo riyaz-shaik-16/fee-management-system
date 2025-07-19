@@ -26,10 +26,12 @@ export default function ProfilePage() {
   const [tempEmail, setTempEmail] = useState(user?.email || "");
   const [loading, setLoading] = useState(false);
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const handleSave = async () => {
     try {
       const { data } = await axios.post(
-        "https://fee-management-system.onrender.com/api/student/v1/update-profile",
+        `${apiUrl}/api/student/v1/update-profile`,
         { name: tempName, email: tempEmail },
         { withCredentials: true }
       );
@@ -54,7 +56,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "https://fee-management-system.onrender.com/api/auth/v1/logout",
+        `${apiUrl}/api/auth/v1/logout`,
         {},
         {
           withCredentials: true,

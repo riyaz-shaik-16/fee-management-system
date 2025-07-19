@@ -19,6 +19,7 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const {
     register,
@@ -32,7 +33,7 @@ const LoginPage = () => {
       setLoading(true);
       dispatch(setError(null));
       const { data } = await axios.post(
-        'https://fee-management-system.onrender.com/api/auth/v1/login',
+        `${apiUrl}/api/auth/v1/login`,
         values,
         { withCredentials: true }
       );

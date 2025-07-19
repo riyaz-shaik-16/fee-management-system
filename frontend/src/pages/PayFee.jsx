@@ -10,6 +10,7 @@ const PayFeesPage = () => {
   const [processing, setProcessing] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handlePayNow = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const PayFeesPage = () => {
     setTimeout(async () => {
       try {
         const { data } = await axios.post(
-          "https://fee-management-system.onrender.com/api/student/v1/pay-fee",
+          `{apiUrl}/api/student/v1/pay-fee`,
           {},
           { withCredentials: true }
         );

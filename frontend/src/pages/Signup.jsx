@@ -26,11 +26,12 @@ const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector(selectUserError);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const onSubmit = async (values) => {
     try {
       const { data } = await axios.post(
-        "https://fee-management-system.onrender.com/api/auth/v1/signup",
+        `${apiUrl}/api/auth/v1/signup`,
         values,
         { withCredentials: true }
       );
