@@ -1,11 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { useTheme } from "../context/mode-toggle";
-import { Moon, Sun } from "lucide-react";
-import ThemeToggle from "./ThemeToggle";
+import { ThemeToggle } from ".";
 
 const Navbar = () => {
-  const { darkMode, setDarkMode } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -57,7 +54,7 @@ const Navbar = () => {
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
                   className={`block w-5 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 ${
-                    menuOpen ? "rotate-45 translate-y-1" : ""
+                    menuOpen ? "rotate-45 translate-y-1 w-7" : ""
                   }`}
                 />
                 <span
@@ -67,7 +64,7 @@ const Navbar = () => {
                 />
                 <span
                   className={`block w-5 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 ${
-                    menuOpen ? "-rotate-45 -translate-y-1" : ""
+                    menuOpen ? "-rotate-45 -translate-y-1 w-7" : ""
                   }`}
                 />
               </div>
@@ -76,6 +73,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* for mobile */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           menuOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
