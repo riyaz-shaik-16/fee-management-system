@@ -55,14 +55,13 @@ export default function ProfilePage() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${apiUrl}/api/auth/v1/logout`,
         {},
         {
           withCredentials: true,
         }
       );
-      // console.log(response);
       dispatch(clearUser());
       sessionStorage.clear();
       dispatch(clearStudents());
@@ -109,7 +108,7 @@ export default function ProfilePage() {
                   className="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center gap-2"
                 >
                   <Check className="w-4 h-4" />
-                  Save Changes
+                  {loading ? "Saving.." : "Save Changes"}
                 </button>
                 <button
                   onClick={handleCancel}
