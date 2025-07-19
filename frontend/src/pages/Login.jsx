@@ -40,7 +40,7 @@ const LoginPage = () => {
 
       if (data.success) {
         dispatch(setUser(data.student));
-        sessionStorage.setItem("token",token);
+        sessionStorage.setItem("token",data.token);
         socket.connect();
         reset();
         navigate('/profile');
