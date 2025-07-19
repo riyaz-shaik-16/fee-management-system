@@ -53,18 +53,18 @@ const Navbar = () => {
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
-                  className={`block w-5 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 ${
-                    menuOpen ? "rotate-45 translate-y-1 w-7" : ""
+                  className={`block h-0.5 w-6 bg-gray-800 dark:bg-white transition-transform duration-300 ease-in-out ${
+                    menuOpen ? "rotate-45 translate-y-1.5 w-7" : ""
                   }`}
                 />
                 <span
-                  className={`block w-5 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 my-1 ${
+                  className={`block h-0.5 w-6 bg-gray-800 dark:bg-white transition-opacity duration-300 ease-in-out my-1 ${
                     menuOpen ? "opacity-0" : ""
                   }`}
                 />
                 <span
-                  className={`block w-5 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 ${
-                    menuOpen ? "-rotate-45 -translate-y-1 w-7" : ""
+                  className={`block h-0.5 w-6 bg-gray-800 dark:bg-white transition-transform duration-300 ease-in-out ${
+                    menuOpen ? "-rotate-45 -translate-y-1.5 w-7" : ""
                   }`}
                 />
               </div>
